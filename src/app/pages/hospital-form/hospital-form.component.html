@@ -1,0 +1,60 @@
+<div nz-row class="h-100 w-100" nzJustify="center">
+  <div nz-col nzXXl="8" nzXl="8" nzLg="18" nzMd="22" nzSpan="24">
+    <div nz-row nzJustify="center">
+      <div nz-col nzSpan="24" class="mt-4">
+        <h2 nz-typography class="text-center">Thêm mới bệnh viện</h2>
+      </div>
+      <div nz-col nzSpan="24" class="mt-4">
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+          <nz-form-item class="m-0">
+            <nz-form-label nzSpan="24" nzRequired>
+              Tên bệnh viện
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your username!">
+              <nz-input-group nzPrefixIcon="user">
+                <input type="text" nz-input placeholder="Nhập tên bệnh viện" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="m-0">
+            <nz-form-label nzSpan="24" nzRequired>
+              Quốc gia
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="m-0">
+            <nz-form-label nzSpan="24" nzRequired>
+              Tỉnh thành
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="m-0">
+            <nz-form-label nzSpan="24" nzRequired>
+              Quận huyện
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="m-0">
+            <nz-form-label nzSpan="24" nzRequired>
+              Phường xã
+            </nz-form-label>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
