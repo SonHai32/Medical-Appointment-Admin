@@ -14,8 +14,22 @@ const routes: Routes = [
         component: HospitalListComponent,
       },
       {
-        path: 'create',
-        component: HospitalFormComponent,
+        path: 'form',
+        children: [
+          {
+            path: '',
+            redirectTo: 'create',
+            pathMatch: 'full',
+          },
+          {
+            path: 'create',
+            component: HospitalFormComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: HospitalFormComponent,
+          },
+        ],
       },
     ],
   },

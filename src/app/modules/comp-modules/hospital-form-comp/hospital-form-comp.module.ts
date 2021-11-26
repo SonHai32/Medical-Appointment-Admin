@@ -9,6 +9,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
   declarations: [HospitalFormComponent],
@@ -23,6 +24,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzButtonModule,
     NzSelectModule,
+    NzMessageModule,
   ],
   exports: [HospitalFormComponent],
 })

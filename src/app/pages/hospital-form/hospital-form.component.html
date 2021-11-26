@@ -1,58 +1,104 @@
 <div nz-row class="h-100 w-100" nzJustify="center">
-  <div nz-col nzXXl="8" nzXl="8" nzLg="18" nzMd="22" nzSpan="24">
+  <div nz-col nzXXl="14" nzXl="14" nzLg="18" nzMd="22" nzSpan="24">
     <div nz-row nzJustify="center">
-      <div nz-col nzSpan="24" class="mt-4">
+      <div nz-col nzSpan="24" class="mt-1">
         <h2 nz-typography class="text-center">Thêm mới bệnh viện</h2>
       </div>
-      <div nz-col nzSpan="24" class="mt-4">
-        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-          <nz-form-item class="m-0">
-            <nz-form-label nzSpan="24" nzRequired>
-              Tên bệnh viện
-            </nz-form-label>
-            <nz-form-control nzErrorTip="Please input your username!">
-              <nz-input-group nzPrefixIcon="user">
-                <input type="text" nz-input placeholder="Nhập tên bệnh viện" />
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item class="m-0">
-            <nz-form-label nzSpan="24" nzRequired>
-              Quốc gia
-            </nz-form-label>
-            <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item class="m-0">
-            <nz-form-label nzSpan="24" nzRequired>
-              Tỉnh thành
-            </nz-form-label>
-            <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item class="m-0">
-            <nz-form-label nzSpan="24" nzRequired>
-              Quận huyện
-            </nz-form-label>
-            <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item class="m-0">
-            <nz-form-label nzSpan="24" nzRequired>
-              Phường xã
-            </nz-form-label>
-            <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-select nzPlaceHolder="Lựa chọn quốc gia">
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-          <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+      <div nz-col nzSpan="24" class="mt-2">
+        <form *ngIf="validateForm" nz-form class="login-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <div nz-row nzJustify="center" [nzGutter]="[12, 12]">
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Tên bệnh viện
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('name')">
+                  <input formControlName="name" type="text" nz-input placeholder="Nhập tên bệnh viện" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired> Quốc gia </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('country')">
+                  <nz-select formControlName="country" (ngModelChange)="onCountryChange($event)"
+                    [compareWith]="countryCompareFn" nzPlaceHolder="Lựa chọn quốc gia">
+                    <ng-container *ngIf="listCountry">
+                      <nz-option *ngFor="let country of listCountry" [nzValue]="country" [nzLabel]="country.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Tỉnh thành
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('province')">
+                  <nz-select formControlName="province" (ngModelChange)="onProvinceChange($event)"
+                    [compareWith]="provinceCompareFn" nzPlaceHolder="Lựa chọn tỉnh thành">
+                    <ng-container *ngIf="listProvince">
+                      <nz-option *ngFor="let province of listProvince" [nzValue]="province" [nzLabel]="province.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Quận huyện
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('district')">
+                  <nz-select formControlName="district" (ngModelChange)="onDistrictChange($event)"
+                    [compareWith]="districtCompareFn" nzPlaceHolder="Lựa chọn quận huyện">
+                    <ng-container *ngIf="
+                        listDistrict
+                      ">
+                      <nz-option *ngFor="let district of listDistrict" [nzValue]="district" [nzLabel]="district.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Phường xã
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('ward')">
+                  <nz-select formControlName="ward" [compareWith]="wardCompareFn" nzPlaceHolder="Lựa chọn phường xã ">
+                    <ng-container *ngIf="
+                        listWard
+                      ">
+                      <nz-option *ngFor="let ward of listWard" [nzValue]="ward" [nzLabel]="ward.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired="true">
+                  Địa chỉ
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getFormErrorTooltips('address')">
+                  <input formControlName="address" type="text" nz-input placeholder="Nhập địa chỉ" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col>
+              <button nz-button class="mt-3" [nzType]="'primary'">
+                Thêm mới
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
