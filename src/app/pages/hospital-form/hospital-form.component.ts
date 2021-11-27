@@ -60,6 +60,8 @@ export class HospitalFormComponent implements OnInit {
 
   isNewForm = true;
 
+  hospitalId!: string
+
   // END DEFINE VARIABLES
   // ----------------------------------------- //
 
@@ -76,6 +78,7 @@ export class HospitalFormComponent implements OnInit {
         map((param) => {
           const id: string | null = param.get('id'); // TODO get hospital id from router if current route === 'edit', it will match this logic
           if (id) {
+            this.hospitalId = id
             // TODO if match this, it mean current route is 'edit' and we has hospitalId, so we get hospital by id
             return this.hospitalService
               .getOne(id, [
@@ -127,6 +130,9 @@ export class HospitalFormComponent implements OnInit {
         address: this.validateForm.controls['address'].value,
         ward: this.validateForm.controls['ward'].value as IWard,
       };
+      if(this.hospitalId){
+        hospital['id'] = this.hospitalId // TODO set hospital id value if existed
+      }
       if (this.isNewForm) {
         this.hospitalService.addNew(hospital).subscribe(
           (res: string) => {
