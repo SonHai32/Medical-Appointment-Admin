@@ -13,8 +13,11 @@ export class HospitalService {
 
   private readonly apiUrl = environment.apiUrl + '/hospital';
 
-  addNew(hospital: IHospital): any {
-    return this.http.post(this.apiUrl, { data: hospital }).pipe(take(1));
+  addNew(hospital: IHospital): Observable<string> {
+    return this.http.post(this.apiUrl, { data: hospital }).pipe(
+      take(1),
+      map((res: any) => res.message as string)
+    );
   }
 
   getAll(): Observable<IHospital[]> {
@@ -24,9 +27,20 @@ export class HospitalService {
     );
   }
   getOne(id: string, relations?: string[]): Observable<IHospital> {
-    return this.http.get(this.apiUrl + `/${id}${relations? `?relations=${relations.join(',')}`: ``}`).pipe(
-      take(1),
-      map((res: any) => res.data as IHospital)
-    );
+    return this.http
+      .get(
+        this.apiUrl +
+          `/${id}${relations ? `?relations=${relations.join(',')}` : ``}`
+      )
+      .pipe(
+        take(1),
+        map((res: any) => res.data as IHospital)
+      );
+  }
+
+  update(hospital: IHospital): Observable<string> {
+    return this.http
+      .patch(this.apiUrl, { data: hospital })
+      .pipe((take(1), map((res: any) => res.message as string)));
   }
 }
