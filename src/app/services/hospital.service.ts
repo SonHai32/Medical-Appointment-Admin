@@ -1,6 +1,6 @@
 import { take, map } from 'rxjs/operators';
 import { IHospital } from './../models/hospital.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -42,5 +42,12 @@ export class HospitalService {
     return this.http
       .patch(this.apiUrl, { data: hospital })
       .pipe((take(1), map((res: any) => res.message as string)));
+  }
+
+  delete(listID: string[]): Observable<string> {
+    return this.http.delete(this.apiUrl, { body: { data: listID } }).pipe(
+      take(1),
+      map((res: any) => res.message as string)
+    );
   }
 }

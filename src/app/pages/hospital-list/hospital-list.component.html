@@ -1,1 +1,61 @@
-<p>hospital-list works!</p>
+<div nz-row nzJustify="center" class="w-100 h-100 p-2" style="overflow-y: scroll;">
+  <div nz-col nzSpan="24">
+    <div nz-row nzJustify="end" class="my-1">
+      <div nz-col nzSpan="24">
+        <h2 nz-typography class="text-center">Danh sách bệnh viện</h2>
+      </div>
+      <div nz-col>
+        <div class="d-flex align-items-center justify-content-center">
+          <button [routerLink]="['form', 'create']" nz-button nzType="primary">Thêm mới</button>
+          <button *ngIf="checked || indeterminated" (click)="deleteConfirmBox()" nz-button nzDanger="true"
+            nzType="primary" class="ms-2 d-flex align-items-center justify-content-center">
+            <i nz-icon nzType="delete"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nz-table #hospitalTable [nzData]="listHospital">
+      <thead>
+        <tr>
+          <th>Tên bệnh viện</th>
+          <th>Quốc gia</th>
+          <th>Tỉnh thành</th>
+          <th>Quận huyện</th>
+          <th>Phường xã</th>
+          <th>Địa chỉ</th>
+          <th>Hành động</th>
+          <th nzShowCheckbox="true" [(nzChecked)]="checked" [nzIndeterminate]="indeterminated"
+            (nzCheckedChange)="onAllItemCheck($event)"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hospital of hospitalTable.data">
+          <td>
+            <a nz-typography [routerLink]="['form', 'edit', hospital.id]">
+              {{ hospital.name }}
+            </a>
+          </td>
+          <td>{{ hospital.ward.district.province.country.name }}</td>
+          <td>{{ hospital.ward.district.province.name }}</td>
+          <td>{{ hospital.ward.district.name}}</td>
+          <td>{{ hospital.ward.name }}</td>
+          <td>{{ hospital.address }}</td>
+          <td *ngIf="hospital.id">
+            <div class="d-flex justify-content-center align-items-center">
+              <button [routerLink]="['form', 'edit', hospital.id]" routerLinkActive="router-link-active" nz-button
+                nzType="text" nzShape="circle" class="d-flex align-items-center justify-content-center">
+                <i nz-icon nzType="edit"></i>
+              </button>
+              <button (click)="deleteConfirmBox(hospital.id)" routerLinkActive="router-link-active" nz-button
+                nzType="text" nzDanger="true" nzShape="circle" class="d-flex align-items-center justify-content-center">
+                <i nz-icon nzType="delete"></i>
+              </button>
+            </div>
+          </td>
+          <td *ngIf="hospital.id" nzShowCheckbox="true" (nzCheckedChange)="onItemChecked(hospital.id, $event)"
+            [nzChecked]="setOfCheckedItem.has(hospital.id)"></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
