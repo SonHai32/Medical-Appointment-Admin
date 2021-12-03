@@ -20,6 +20,27 @@ const routes: Routes = [
         (m) => m.HospitalModule
       ),
   },
+  {
+    path: 'academic-rank',
+    loadChildren: () =>
+      import('./modules/core-modules/academic-rank.module').then(
+        (m) => m.AcademicRankModule
+      ),
+  },
+  {
+    path: 'doctor',
+    loadChildren: () =>
+      import('./modules/core-modules/doctor.module').then(
+        (m) => m.DoctorModule
+      ),
+  },
+  {
+    path: 'hospital-service',
+    loadChildren: () =>
+      import('./modules/core-modules/hospital-service.module').then(
+        (m) => m.HospitalServiceModule
+      ),
+  },
 ];
 
 @NgModule({

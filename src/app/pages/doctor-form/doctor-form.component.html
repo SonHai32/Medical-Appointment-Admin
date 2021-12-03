@@ -1,0 +1,217 @@
+<div nz-row nzJustify="center" class="w-100 h-100 p-2" style="overflow-y: scroll;">
+  <div nz-col nzXXl="14" nzXl="14" nzLg="18" nzMd="22" nzSpan="24">
+    <div nz-row nzJustify="center">
+      <div nz-col nzSpan="24">
+        <h2 nz-typography class="text-center">Thêm mới bác sĩ</h2>
+      </div>
+    </div>
+    <div nz-row nzAlign="middle" nzJustify="center">
+      <div nz-col nzSpan="24">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="onSubmit()">
+          <div nz-row nzJustify="center" [nzGutter]="[12,12]">
+            <div nz-col nzSpan="24" nzXXl="8" nzXl="8" nzMd="12">
+              <nz-form-item class="m-0">
+                <nz-form-label nzRequired nzSpan="24">Họ</nz-form-label>
+                <nz-form-control>
+                  <input type="text" nz-input formControlName="firstname">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24" nzXXl="8" nzXl="8" nzMd="12">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24">Tên đệm</nz-form-label>
+                <nz-form-control>
+                  <input type="text" nz-input formControlName="middlename">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24" nzXXl="8" nzXl="8" nzMd="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzRequired nzSpan="24">Tên</nz-form-label>
+                <nz-form-control>
+                  <input type="text" nz-input formControlName="lastname">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="8" nzXl="8" nzMd="8" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Giới tính</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-select nzPlaceHolder="Lựa chọn giới tính" formControlName="gender">
+                    <ng-container *ngIf="listGender">
+                      <nz-option *ngFor="let gender of listGender" [nzValue]="gender" [nzLabel]="gender.name">
+                      </nz-option>
+                    </ng-container>
+
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="8" nzXl="8" nzMd="8" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Ngày tháng năm sinh</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-date-picker class="w-100" formControlName="birthday"></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="8" nzXl="8" nzMd="8" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>CMND/CCCD</nz-form-label>
+                <nz-form-control>
+                  <input type="text" nz-input formControlName="citizenIdentification">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Địa chỉ email</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <input type="email" nz-input formControlName="emailAddress">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Số điện thoại</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <input type="text" nz-input formControlName="phoneNumber">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzMd="12" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Chuyên ngành</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-select nzPlaceHolder="Lựa chọn chuyên ngành" formControlName="specialist">
+                    <ng-container *ngIf="listSpecialist">
+                      <nz-option *ngFor="let specialist of listSpecialist" [nzValue]="specialist"
+                        [nzLabel]="specialist.name"></nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzMd="12" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Học hàm, học vị</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-select nzAllowClear="true" nzMode="multiple" nzPlaceHolder="Lựa chọn học hàm - học vị"
+                    formControlName="academicRank">
+                    <ng-container *ngIf="listAcademicRank">
+                      <nz-option *ngFor="let academicRank of listAcademicRank" [nzValue]="academicRank"
+                        [nzLabel]="academicRank.shortname + ' ( ' + academicRank.fullname + ' ) ' "></nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Ngày vào làm</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-date-picker class="w-100" formControlName="startAt"></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>Bệnh viện</nz-form-label>
+                <nz-form-control nzSpan="24">
+                  <nz-select nzPlaceHolder="Lựa chọn bệnh viện" formControlName="hospital">
+                    <ng-container *ngIf="listHospital">
+                      <nz-option *ngFor="let hospital of listHospital" [nzValue]="hospital" [nzLabel]="hospital.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired> Quốc gia </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="country" (ngModelChange)="onCountryChange($event)"
+                    [compareWith]="countryCompareFn" nzPlaceHolder="Lựa chọn quốc gia">
+                    <ng-container *ngIf="listCountry">
+                      <nz-option *ngFor="let country of listCountry" [nzValue]="country" [nzLabel]="country.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Tỉnh thành
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="province" (ngModelChange)="onProvinceChange($event)"
+                    [compareWith]="provinceCompareFn" nzPlaceHolder="Lựa chọn tỉnh thành">
+                    <ng-container *ngIf="listProvince">
+                      <nz-option *ngFor="let province of listProvince" [nzValue]="province" [nzLabel]="province.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Quận huyện
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="district" (ngModelChange)="onDistrictChange($event)"
+                    [compareWith]="districtCompareFn" nzPlaceHolder="Lựa chọn quận huyện">
+                    <ng-container *ngIf="
+                        listDistrict
+                      ">
+                      <nz-option *ngFor="let district of listDistrict" [nzValue]="district" [nzLabel]="district.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXXl="12" nzXl="12" nzLg="12" nzMd="24" nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Phường xã
+                </nz-form-label>
+                <nz-form-control>
+                  <nz-select formControlName="ward" [compareWith]="wardCompareFn" nzPlaceHolder="Lựa chọn phường xã ">
+                    <ng-container *ngIf="
+                        listWard
+                      ">
+                      <nz-option *ngFor="let ward of listWard" [nzValue]="ward" [nzLabel]="ward.name">
+                      </nz-option>
+                    </ng-container>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired="true">
+                  Địa chỉ
+                </nz-form-label>
+                <nz-form-control>
+                  <input formControlName="address" type="text" nz-input placeholder="Nhập địa chỉ" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col>
+              <div class="d-flex align-items-center justify-content-center">
+                <button nz-button nzType="primary" type="submit" class="mx-1">Thêm mới</button>
+                <button nz-button nzType="dashed" nzDanger="true" type="reset" class="mx-1">Xóa nhập</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

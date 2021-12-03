@@ -1,17 +1,17 @@
-import { AcademicRankFormComponent } from './../pages/academic-rank-form/academic-rank-form.component';
-import { AcademicRankListComponent } from './../pages/academic-rank-list/academic-rank-list.component';
-import { AcademicRankComponent } from './../pages/academic-rank/academic-rank.component';
+import { HospitalServiceFormComponent } from './../pages/hospital-service-form/hospital-service-form.component';
+import { HospitalServiceListComponent } from './../pages/hospital-service-list/hospital-service-list.component';
+import { HospitalServiceComponent } from './../pages/hospital-service/hospital-service.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: AcademicRankComponent,
+    component: HospitalServiceComponent,
     children: [
       {
         path: '',
-        component: AcademicRankListComponent,
+        component: HospitalServiceListComponent,
       },
       {
         path: 'form',
@@ -23,11 +23,11 @@ const routes: Routes = [
           },
           {
             path: 'create',
-            component: AcademicRankFormComponent,
+            component: HospitalServiceFormComponent,
           },
           {
             path: 'edit/:id',
-            component: AcademicRankFormComponent,
+            component: HospitalServiceFormComponent,
           },
         ],
       },
@@ -39,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AcademicRankRoutingModule {}
+export class HospitalServiceRoutingModule {}

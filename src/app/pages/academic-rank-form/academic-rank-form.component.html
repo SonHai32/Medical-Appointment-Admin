@@ -1,1 +1,55 @@
-<p>academic-rank-form works!</p>
+<div nz-row nzJustify="center">
+  <div nz-col nzXXl="14" nzXl="14" nzLg="18" nzMd="22" nzSpan="24">
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <h2 nz-typography class="text-center">
+          Thêm học hàm học vị
+        </h2>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="onSumbit()">
+          <div nz-row [nzGutter]="[12, 12]" nzJustify="center">
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Tên học hàm
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getErrorTooltips('fullname')">
+                  <input type="text" nz-input formControlName="fullname">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24" nzRequired>
+                  Mã học hàm học vị
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getErrorTooltips('shortname')">
+                  <input type="text" nz-input formControlName="shortname">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzSpan="24">
+              <nz-form-item class="m-0">
+                <nz-form-label nzSpan="24">
+                  Mô tả
+                </nz-form-label>
+                <nz-form-control [nzErrorTip]="getErrorTooltips('description')">
+                  <input type="text" nz-input formControlName="description">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col>
+              <button nz-button nzType="primary" type="submit" class="mx-1">
+                Thêm mới
+              </button>
+              <button nz-button nzType="dashed" type="reset" nzDanger="true" class="mx-1">Xóa nhập</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

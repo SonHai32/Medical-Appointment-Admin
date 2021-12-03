@@ -17,7 +17,7 @@
             <a routerLink="/hospital">Bệnh viện</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Bác Sĩ</a>
+            <a [routerLink]="['doctor']">Bác Sĩ</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a> Lịch làm bác sĩ </a>
@@ -29,13 +29,13 @@
             <a> Lịch khám bệnh nhân </a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a> Học hàm / Học vị </a>
+            <a [routerLink]="['academic-rank']"> Học hàm / Học vị </a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a> Chuyên khoa </a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Giá khám theo chuyên khoa </a>
+            <a [routerLink]="['hospital-service']"> Dịch vụ bệnh viện</a>
           </li>
         </ul>
       </li>
