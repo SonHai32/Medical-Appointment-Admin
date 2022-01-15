@@ -21,10 +21,7 @@ export class HospitalService {
   }
 
   getAll(): Observable<IHospital[]> {
-    return this.http.get<IHospital[]>(this.apiUrl).pipe(
-      take(1),
-      map((res: any) => res.data as IHospital[])
-    );
+    return this.http.get<IHospital[]>(this.apiUrl).pipe(take(1));
   }
   getOne(id: string, relations?: string[]): Observable<IHospital> {
     return this.http
